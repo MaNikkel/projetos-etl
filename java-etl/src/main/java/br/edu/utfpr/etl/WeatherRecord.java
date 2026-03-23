@@ -1,0 +1,41 @@
+package br.edu.utfpr.etl;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Optional;
+
+public record WeatherRecord(
+    String name,
+    LocalDate datetime,
+    double tempmax,
+    double tempmin,
+    double temp,
+    double feelslikemax,
+    double feelslikemin,
+    double feelslike,
+    double dew,
+    double humidity,
+    double precip,
+    double precipprob,
+    double precipcover,
+    Optional<String> preciptype,
+    Optional<Double> snow,
+    Optional<Double> snowdepth,
+    double windgust,
+    double windspeed,
+    double winddir,
+    double sealevelpressure,
+    double cloudcover,
+    double visibility,
+    double solarradiation,
+    double solarenergy,
+    double uvindex,
+    double severerisk,
+    LocalDateTime sunrise,
+    LocalDateTime sunset,
+    double moonphase,
+    String conditions,
+    String description,
+    String icon,
+    Optional<String> stations
+) {}

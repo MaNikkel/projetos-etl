@@ -1,0 +1,25 @@
+cabal-version: 2.4
+name:          meteo-etl
+version:       0.1.0.0
+synopsis:      Meteorological ETL in Haskell
+license:       MIT
+build-type:    Simple
+
+executable meteo-etl
+  main-is:          Main.hs
+  other-modules:    CsvExtractor
+                  , DatabaseLoader
+                  , Transformer
+                  , UnitConverter
+                  , WeatherRecord
+  hs-source-dirs:   src
+  default-language:  Haskell2010
+  ghc-options:      -Wall -O2
+  build-depends:
+      base                >= 4.14 && < 5
+    , bytestring          >= 0.10
+    , cassava             >= 0.5
+    , postgresql-simple   >= 0.6
+    , text                >= 1.2
+    , time                >= 1.9
+    , vector              >= 0.12

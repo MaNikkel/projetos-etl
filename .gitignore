@@ -1,0 +1,28 @@
+# Build artifacts
+java-etl/target/
+haskell-etl/.stack-work/
+
+# Python venv
+tests/.venv/
+tests/__pycache__/
+tests/.pytest_cache/
+*.pyc
+
+# Environment config
+.env
+
+# Docker volumes
+pgdata/
+
+# IDE
+.idea/
+*.iml
+.vscode/
+*.swp
+*~
+.DS_Store
+
+*/test-1000000.csv
+*/test.csv
+
+*/.terraform

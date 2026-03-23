@@ -1,0 +1,16 @@
+services:
+  postgres:
+    image: postgres:16
+    container_name: meteo-postgres
+    environment:
+      POSTGRES_DB: ${DB_NAME:-meteorological}
+      POSTGRES_USER: ${DB_USER:-meteo}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-meteo123}
+    ports:
+      - "${DB_PORT:-5432}:5432"
+    volumes:
+      - ./init:/docker-entrypoint-initdb.d
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:
