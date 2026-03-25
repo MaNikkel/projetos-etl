@@ -1,118 +1,66 @@
-# Meteorological ETL — Java vs Haskell Comparison
+# ETL Meteorológico — Comparação Java vs Haskell
 
-A master's thesis project comparing OOP (Java) and functional (Haskell) implementations of the same ETL pipeline for meteorological data.
+Projeto de dissertação de mestrado que compara implementações orientada a objetos (Java) e funcional (Haskell) do mesmo pipeline ETL para dados meteorológicos.
 
-## Prerequisites
+## Pré-requisitos
 
-- Docker & Docker Compose
+- Docker e Docker Compose
 - Java 21 + Maven
 - GHC + Stack (Haskell)
 - Python 3.12+
 
-## Configuration
+## Configuração
 
-All settings are managed through environment variables. Copy the example file and adjust as needed:
+Todas as configurações são gerenciadas por variáveis de ambiente. Copie o arquivo de exemplo e ajuste conforme necessário:
 
 ```bash
 cp .env.example .env
 ```
 
-| Variable | Default | Description |
+| Variável | Padrão | Descrição |
 |---|---|---|
-| `DB_HOST` | `localhost` | PostgreSQL host |
-| `DB_PORT` | `5432` | PostgreSQL port |
-| `DB_NAME` | `meteorological` | Database name |
-| `DB_USER` | `meteo` | Database user |
-| `DB_PASSWORD` | `meteo123` | Database password |
-| `CSV_PATH` | `test.csv` | Path to source CSV (relative to project root) |
+| `DB_HOST` | `localhost` | Host do PostgreSQL |
+| `DB_PORT` | `5432` | Porta do PostgreSQL |
+| `DB_NAME` | `meteorological` | Nome do banco de dados |
+| `DB_USER` | `meteo` | Usuário do banco de dados |
+| `DB_PASSWORD` | `meteo123` | Senha do banco de dados |
+| `CSV_PATH` | `test.csv` | Caminho do CSV de origem (relativo à raiz do projeto) |
 
-The `.env` file is loaded by the Makefile and docker-compose automatically. Each ETL implementation also reads these variables at runtime (falling back to the defaults above).
+O arquivo `.env` é carregado automaticamente pelo Makefile e pelo docker-compose. Cada implementação ETL também lê essas variáveis em tempo de execução (com fallback para os padrões acima).
 
-## Quick Start
+## Início Rápido
 
 ```bash
-# 1. Configure (or just use defaults)
+# 1. Configurar (ou usar os padrões)
 cp .env.example .env
 
-# 2. Start PostgreSQL
+# 2. Iniciar o PostgreSQL
 make up
 
-# 3. Set up Python test environment
+# 3. Configurar o ambiente de testes em Python
 make venv
 
-# 4. Run both ETLs and tests
+# 4. Rodar ambos os ETLs e os testes
 make all
 ```
 
-## Individual Commands
+## Comandos Individuais
 
 ```bash
-make up          # Start PostgreSQL container
-make wait-pg     # Wait until PostgreSQL is ready
-make java        # Build and run Java ETL
-make haskell     # Build and run Haskell ETL
-make test        # Run pytest verification suite
-make down        # Stop and remove containers + volumes
-make clean       # Full cleanup (containers, build artifacts, venv)
+make up          # Inicia o container PostgreSQL
+make wait-pg     # Aguarda o PostgreSQL ficar pronto
+make java        # Compila e executa o ETL em Java
+make haskell     # Compila e executa o ETL em Haskell
+make test        # Executa a suíte de verificação com pytest
+make down        # Para e remove containers + volumes
+make clean       # Limpeza completa (containers, artefatos de build, venv)
 ```
+## Estratégia de Testes
 
-## Project Structure
+Os testes usam **pytest** com **psycopg3** para consultar o banco após cada execução ETL:
 
-```
-.
-├── .env.example                # Environment variable defaults (copy to .env)
-├── docker-compose.yml          # PostgreSQL 16 service
-├── init/
-│   └── 01-create-table.sql     # DB schema (auto-run on first start)
-├── test.csv                    # Source meteorological data (imperial units)
-├── java-etl/                   # Java/Maven ETL implementation
-│   ├── pom.xml
-│   └── src/main/java/br/edu/utfpr/etl/
-│       ├── Main.java
-│       ├── WeatherRecord.java
-│       ├── CsvExtractor.java
-│       ├── Transformer.java
-│       ├── UnitConverter.java
-│       └── DatabaseLoader.java
-├── haskell-etl/                # Haskell/Stack ETL implementation
-│   ├── stack.yaml
-│   ├── meteo-etl.cabal
-│   └── src/
-│       ├── Main.hs
-│       ├── WeatherRecord.hs
-│       ├── CsvExtractor.hs
-│       ├── Transformer.hs
-│       ├── UnitConverter.hs
-│       └── DatabaseLoader.hs
-├── tests/                      # pytest + psycopg3 verification suite
-│   ├── requirements.txt
-│   ├── conftest.py
-│   ├── test_etl.py             # Per-implementation tests (parametrized)
-│   └── test_cross_impl.py      # Cross-implementation equivalence test
-├── Makefile                    # Build/run/test orchestration
-├── projeto.md                  # Project specification + data model
-└── plan.md                     # Implementation plan
-```
-
-## Unit Conversions
-
-All imperial values from the CSV are converted to metric before database insert:
-
-| Conversion | Formula |
-|---|---|
-| Fahrenheit → Celsius | `(F − 32) × 5 / 9` |
-| Inches → Millimeters | `value × 25.4` |
-| Miles/h → Km/h | `value × 1.60934` |
-| Miles → Km | `value × 1.60934` |
-
-All converted floats are rounded to **2 decimal places**.
-
-## Test Strategy
-
-Tests use **pytest** with **psycopg3** to query the database after each ETL run:
-
-- **Row count**: exactly 15 rows loaded
-- **Schema**: all 33 columns present with correct types
-- **Value equivalence**: each value matches Python-computed golden data (`pytest.approx` for floats)
-- **Null handling**: empty CSV fields stored as SQL `NULL`
-- **Cross-implementation**: Java and Haskell outputs are row-by-row identical
+- **Contagem de linhas**: exatamente 15 linhas carregadas
+- **Esquema**: todas as 33 colunas presentes com tipos corretos
+- **Equivalência de valores**: cada valor corresponde ao dado esperado calculado em Python (`pytest.approx` para floats)
+- **Tratamento de nulos**: campos vazios do CSV são persistidos como `NULL` em SQL
+- **Equivalência entre implementações**: saídas de Java e Haskell são idênticas linha a linha
