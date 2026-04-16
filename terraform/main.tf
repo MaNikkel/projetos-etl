@@ -408,7 +408,7 @@ resource "aws_db_instance" "postgres" {
   vpc_security_group_ids          = [aws_security_group.rds.id]
   publicly_accessible             = true
   multi_az                        = false
-  backup_retention_period         = 7
+  backup_retention_period         = 0
   deletion_protection             = false
   skip_final_snapshot             = true
   apply_immediately               = true
@@ -417,7 +417,6 @@ resource "aws_db_instance" "postgres" {
   enabled_cloudwatch_logs_exports = ["postgresql", "upgrade"]
   performance_insights_enabled    = false
   auto_minor_version_upgrade      = true
-  manage_master_user_password     = false
 
   tags = merge(local.common_tags, {
     Name = "${var.project_name}-postgres"

@@ -1,0 +1,15 @@
+aws_region       = "sa-east-1"
+project_name     = "mestrado-etl"
+instance_type    = "t3.micro"
+db_instance_class = "db.t3.micro"
+
+# Restrict this to your public IP, for example:
+# allowed_ssh_cidr = "203.0.113.10/32"
+allowed_ssh_cidr = "0.0.0.0/0"
+
+# Optional. Leave empty if you will connect through AWS Systems Manager only.
+key_name = ""
+
+db_name     = "meteorological"
+db_user     = "meteo"
+db_password = "change-this-password"
