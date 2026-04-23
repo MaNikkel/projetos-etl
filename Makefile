@@ -51,7 +51,7 @@ $(VENV)/bin/activate: tests/requirements.txt
 # ---------------------------------------------------------------------------
 
 java:
-	cd java-etl && mvn -q compile exec:java
+	cd java-etl && export JAVA_HOME=/usr/lib/jvm/java-21-amazon-corretto && export PATH="$JAVA_HOME/bin:$PATH" && hash -r && mvn -q compile exec:java
 
 haskell:
 	cd haskell-etl && stack run
