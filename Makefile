@@ -51,10 +51,10 @@ $(VENV)/bin/activate: tests/requirements.txt
 # ---------------------------------------------------------------------------
 
 java:
-	cd java-etl && mvn -q compile exec:java
+	cd java-etl && mvn -q compile exec:java 2>&1 | tee run.log
 
 haskell:
-	cd haskell-etl && stack run
+	cd haskell-etl && stack run 2>&1 | tee run.log
 
 # ---------------------------------------------------------------------------
 # Tests
