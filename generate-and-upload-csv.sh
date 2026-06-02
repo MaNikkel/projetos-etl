@@ -24,5 +24,5 @@ data_line='"-25.4607,-49.2785",2026-02-16,85.9,66.6,72.9,89.1,66.6,73.5,67,84.2,
   done
 } > "$output_file"
 
-scp -i ~/.ssh/etl-aws "$output_file" ssm-user@3.83.11.14:/home/ssm-user/projetos-etl/java-etl/test.csv
-scp -i ~/.ssh/etl-aws "$output_file" ssm-user@3.93.40.45:/home/ssm-user/projetos-etl/haskell-etl/test.csv
+scp -i ~/.ssh/etl-aws "$output_file" ssm-user@3.236.195.136:/home/ssm-user/projetos-etl/java-etl/test.csv
+scp -i ~/.ssh/etl-aws "$output_file" ssm-user@107.23.12.109:/home/ssm-user/projetos-etl/haskell-etl/test.csv

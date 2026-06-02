@@ -40,7 +40,13 @@ variable "public_subnet_cidrs" {
 variable "instance_type" {
   description = "EC2 instance type for the two app servers"
   type        = string
-  default     = "t3.micro"
+  default     = "t3.medium"
+}
+
+variable "ec2_root_volume_size" {
+  description = "Root EBS volume size for EC2 instances in GB"
+  type        = number
+  default     = 80
 }
 
 variable "key_name" {
@@ -257,6 +263,11 @@ resource "aws_instance" "etl" {
   monitoring             = true
 
   key_name = var.key_name != "" ? var.key_name : null
+
+  root_block_device {
+    volume_size = var.ec2_root_volume_size
+    volume_type = "gp3"
+  }
 
   user_data = <<-EOT
               #!/bin/bash

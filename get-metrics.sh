@@ -1,7 +1,7 @@
   aws cloudwatch get-metric-data \
     --region us-east-1 \
-    --start-time "2026-04-23T14:12:00Z" \
-    --end-time "2026-04-23T14:16:00Z" \
+    --start-time "2026-06-01T14:44:00Z" \
+    --end-time "2026-06-01T14:48:00Z" \
     --metric-data-queries '[
       {
         "Id": "java_mem_max",
@@ -9,7 +9,7 @@
           "Metric": {
             "Namespace": "mestrado-etl",
             "MetricName": "mem_used_percent",
-            "Dimensions": [{"Name": "InstanceId", "Value": "i-07d9247870bc7b12e"}]
+            "Dimensions": [{"Name": "InstanceId", "Value": "i-0077b2e8f26a71c34"}]
           },
           "Period": 60,
           "Stat": "Maximum"
@@ -22,7 +22,7 @@
           "Metric": {
             "Namespace": "mestrado-etl",
             "MetricName": "mem_used_percent",
-            "Dimensions": [{"Name": "InstanceId", "Value": "i-07d9247870bc7b12e"}]
+            "Dimensions": [{"Name": "InstanceId", "Value": "i-0077b2e8f26a71c34"}]
           },
           "Period": 60,
           "Stat": "Average"
@@ -35,7 +35,7 @@
           "Metric": {
             "Namespace": "AWS/EC2",
             "MetricName": "CPUUtilization",
-            "Dimensions": [{"Name": "InstanceId", "Value": "i-07d9247870bc7b12e"}]
+            "Dimensions": [{"Name": "InstanceId", "Value": "i-0077b2e8f26a71c34"}]
           },
           "Period": 60,
           "Stat": "Average"
@@ -48,7 +48,7 @@
           "Metric": {
             "Namespace": "AWS/EC2",
             "MetricName": "NetworkIn",
-            "Dimensions": [{"Name": "InstanceId", "Value": "i-07d9247870bc7b12e"}]
+            "Dimensions": [{"Name": "InstanceId", "Value": "i-0077b2e8f26a71c34"}]
           },
           "Period": 60,
           "Stat": "Average"
@@ -61,7 +61,7 @@
           "Metric": {
             "Namespace": "AWS/EC2",
             "MetricName": "NetworkOut",
-            "Dimensions": [{"Name": "InstanceId", "Value": "i-07d9247870bc7b12e"}]
+            "Dimensions": [{"Name": "InstanceId", "Value": "i-0077b2e8f26a71c34"}]
           },
           "Period": 60,
           "Stat": "Average"
@@ -74,7 +74,7 @@
           "Metric": {
             "Namespace": "mestrado-etl",
             "MetricName": "mem_used_percent",
-            "Dimensions": [{"Name": "InstanceId", "Value": "i-0c54cef44d7ac9941"}]
+            "Dimensions": [{"Name": "InstanceId", "Value": "i-0ba27fb030a44a53d"}]
           },
           "Period": 60,
           "Stat": "Maximum"
@@ -87,7 +87,7 @@
           "Metric": {
             "Namespace": "mestrado-etl",
             "MetricName": "mem_used_percent",
-            "Dimensions": [{"Name": "InstanceId", "Value": "i-0c54cef44d7ac9941"}]
+            "Dimensions": [{"Name": "InstanceId", "Value": "i-0ba27fb030a44a53d"}]
           },
           "Period": 60,
           "Stat": "Average"
@@ -100,7 +100,7 @@
           "Metric": {
             "Namespace": "AWS/EC2",
             "MetricName": "CPUUtilization",
-            "Dimensions": [{"Name": "InstanceId", "Value": "i-0c54cef44d7ac9941"}]
+            "Dimensions": [{"Name": "InstanceId", "Value": "i-0ba27fb030a44a53d"}]
           },
           "Period": 60,
           "Stat": "Average"
@@ -113,7 +113,7 @@
           "Metric": {
             "Namespace": "AWS/EC2",
             "MetricName": "NetworkIn",
-            "Dimensions": [{"Name": "InstanceId", "Value": "i-0c54cef44d7ac9941"}]
+            "Dimensions": [{"Name": "InstanceId", "Value": "i-0ba27fb030a44a53d"}]
           },
           "Period": 60,
           "Stat": "Average"
@@ -126,7 +126,7 @@
           "Metric": {
             "Namespace": "AWS/EC2",
             "MetricName": "NetworkOut",
-            "Dimensions": [{"Name": "InstanceId", "Value": "i-0c54cef44d7ac9941"}]
+            "Dimensions": [{"Name": "InstanceId", "Value": "i-0ba27fb030a44a53d"}]
           },
           "Period": 60,
           "Stat": "Average"

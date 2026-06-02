@@ -66,20 +66,6 @@ Os testes usam **pytest** com **psycopg3** para consultar o banco após cada exe
 - **Equivalência entre implementações**: saídas de Java e Haskell são idênticas linha a linha
 
 
-Contectar
-
-ssh -i ~/.ssh/etl-aws ssm-user@3.83.11.14  - Java
-ssh -i ~/.ssh/etl-aws ssm-user@3.93.40.45 - Haskell
-
-
-export JAVA_HOME=/usr/lib/jvm/java-21-amazon-corretto && export PATH="$JAVA_HOME/bin:$PATH" && hash -r
-
-COPIAR ARQUIVOS
-
-JAVA: scp -i ~/.ssh/etl-aws /Users/mathiasnikkel/Documents/UTFPR/dissertacao/projetos-etl/file.csv ssm-user@3.83.11.14:/home/ssm-user/projetos-etl/java-etl/test.csv
-
-HASKELL: scp -i ~/.ssh/etl-aws /Users/mathiasnikkel/Documents/UTFPR/dissertacao/projetos-etl/file.csv  ssm-user@3.93.40.45:/home/ssm-user/projetos-etl/haskell-etl/test.csv
-
 # Gerar CSV e carregar
 
 ./generate-and-upload-csv.sh <num>
@@ -98,8 +84,8 @@ Por padrão, o script usa:
 
 - `region`: `us-east-1`
 - `namespace`: `mestrado-etl`
-- instância Java: `i-07d9247870bc7b12e`
-- instância Haskell: `i-0c54cef44d7ac9941`
+- instância Java: `i-0077b2e8f26a71c34`
+- instância Haskell: `i-0ba27fb030a44a53d`
 - `period`: `60` segundos
 - potência ociosa estimada: `8 W`
 - potência máxima estimada: `20 W`
@@ -109,8 +95,8 @@ Exemplo de uso:
 ```bash
 ./estimate-etl-energy.py \
   --region us-east-1 \
-  --start-time "2026-04-23T14:12:00Z" \
-  --end-time "2026-04-23T14:16:00Z"
+  --start-time "2026-06-02T19:54:00Z" \
+  --end-time "2026-06-02T21:06:00Z"
 ```
 
 O resultado inclui, para Java e Haskell:
@@ -124,12 +110,3 @@ O resultado inclui, para Java e Haskell:
 - energia estimada em joules
 
 Para ajustar o modelo de potência:
-
-```bash
-./estimate-etl-energy.py \
-  --region us-east-1 \
-  --start-time "2026-04-23T14:12:00Z" \
-  --end-time "2026-04-23T14:16:00Z" \
-  --idle-watts 7 \
-  --max-watts 18
-```

@@ -9,8 +9,8 @@ from statistics import mean
 
 DEFAULT_REGION = "us-east-1"
 DEFAULT_NAMESPACE = "mestrado-etl"
-DEFAULT_JAVA_INSTANCE_ID = "i-07d9247870bc7b12e"
-DEFAULT_HASKELL_INSTANCE_ID = "i-0c54cef44d7ac9941"
+DEFAULT_JAVA_INSTANCE_ID = "i-0077b2e8f26a71c34"
+DEFAULT_HASKELL_INSTANCE_ID = "i-0ba27fb030a44a53d"
 
 METRICS = [
     ("mem_max", "mestrado-etl", "mem_used_percent", "Maximum"),
@@ -146,9 +146,18 @@ def summarize(results, period, idle_watts, max_watts):
 def format_value(value):
     if value is None:
         return "-"
+
     if abs(value) >= 1000:
-        return f"{value:,.0f}"
-    return f"{value:.2f}"
+        formatted = f"{value:,.0f}"
+    else:
+        formatted = f"{value:.2f}"
+
+    return (
+        formatted
+        .replace(",", "__THOUSANDS__")
+        .replace(".", ",")
+        .replace("__THOUSANDS__", ".")
+    )
 
 
 def print_table(summary):
