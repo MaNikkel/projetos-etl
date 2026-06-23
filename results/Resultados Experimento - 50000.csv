@@ -1,0 +1,12 @@
+Data,01/06,,,,,
+Horário Início,14:43,,,,,
+Horário fim,14:46,,,,,
+Quantidade registros,50000,,,,,
+,,,,,,
+,Java,Haskell,,,,18
+Tempo (ms),18417,28354,,,,
+Pico Memória (%),"4,87","5,65",,,,
+Pico CPU (%),"26,14","10,29",,,,
+Entrada de rede (bytes),1.607.057,"2.814.507,00",,,,
+Saída de rede (bytes),31.147.075,21.130.672,,,,
+Gasto energético estimado (W),"9,740","8,290",,,,
